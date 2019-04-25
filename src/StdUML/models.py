@@ -6,18 +6,8 @@ import enum
 # Create your models here.
 
 class GrossularStdElement(PolymorphicModel):
-    """
-ref to :cite:`UML251` ,7.2.3.1 ,Page 64
-
-An Element is a constituent of a model. Descendants of Element provide semantics appropriate to the concept they
-represent.
-
-Every Element has the inherent capability of owning other Elements. When an Element is removed from a model, all its
-ownedElements are also necessarily removed from the model. The abstract syntax for each kind of Element specifies
-what other kind of Elements it may own. Every Element in a model must be owned by exactly one other Element of that
-model, with the exception of the top-level Packages of the model
-    """
     IDElement=models.IntegerField(primary_key=True)
+    ownedElement= models.ForeignKey('StdUML.GrossularStdComments', related_name="owningElement",on_delete=models.CASCADE)
 
 
 
@@ -164,6 +154,21 @@ class GrossularStdRealization(GrossularStdAbstraction):
     pass
 
 class GrossularStdUsage(GrossularStdDependency):
+    pass
+
+class GrossularStdTemplateableElement(GrossularStdElement):
+    pass
+
+class GrossularStdClassifier(GrossularStdNamespaces,GrossularStdType,GrossularStdTemplateableElement):
+    pass
+
+class  GrossularStdStructuredClassifier(GrossularStdClassifier):
+    pass
+
+class  GrossularStdEncapsulatedClassifier(GrossularStdStructuredClassifier):
+    pass
+
+class GrossularStdClass(GrossularStdEncapsulatedClassifier,GrossularStdBehavioredClassifier)
     pass
 
 
