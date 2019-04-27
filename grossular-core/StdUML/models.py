@@ -168,7 +168,7 @@ class  GrossularStdStructuredClassifier(GrossularStdClassifier):
 class  GrossularStdEncapsulatedClassifier(GrossularStdStructuredClassifier):
     pass
 
-class GrossularStdClass(GrossularStdEncapsulatedClassifier,GrossularStdBehavioredClassifier)
+class GrossularStdClass(GrossularStdEncapsulatedClassifier):
     pass
 
 
