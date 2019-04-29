@@ -91,3 +91,5 @@ local_settings.py
 
 .env
 db.sqlite3
+grossular-core/static
+.vscode

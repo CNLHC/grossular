@@ -9,13 +9,13 @@ from django.template.loader import render_to_string
 
 
 class UseCaseViewset(ModelViewSet):
-    serializer_class = CustomUseCaseSerializer
+    serializer_class =   CustomUseCaseDetailSerializer
     queryset = GrossularCustomUseCase.objects.all()
 
-    def list(self, request, *args, **kwargs):
-        projectName = request.query_params.dict().get('project', '')
-        return Response(
-            data=self.serializer_class(GrossularCustomUseCase.grossular.inProject(projectName), many=True).data)
+    # def list(self, request, *args, **kwargs):
+    #     projectName = request.query_params.dict().get('project', '')
+    #     return Response(
+    #         data=self.serializer_class(GrossularCustomUseCase.grossular.inProject(projectName), many=True).data)
 
     @action(methods=['GET'],detail=False)
     def plantuml(self,request):

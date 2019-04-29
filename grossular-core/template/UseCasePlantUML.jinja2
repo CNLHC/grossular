@@ -1,0 +1,24 @@
+{% autoescape off %}
+{% for package in packages %}
+    {% for actor in actors %}
+        {{ actor }}
+    {% endfor %}
+
+    {% if package.subsystemName is not none %}
+        rectangle {{ package.subsystemName }} {
+    {% endif %}
+
+    {% for case in package.cases %}
+        {{ case }}
+    {% endfor %}
+
+    {% for relation in package.relationSet %}
+        {{ relation }}
+    {% endfor %}
+
+    {% if package.subsystemName  is not none %}
+        }
+    {% endif %}
+{% endfor %}
+{% endautoescape %}
+
