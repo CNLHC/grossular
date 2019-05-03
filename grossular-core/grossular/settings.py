@@ -32,9 +32,12 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'polymorphic',
+    'CustomUMLBase',
     'CustomUseCase',
+    'CustomUMLClass',
     'Project',
     'rest_framework',
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -114,7 +117,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-cn'
+
+LANGUAGES = (
+    ('zh-cn', u'简体中文'),
+    ('en', u'English'),
+)
+LOCALE_PATHS=[BASE_DIR+'/locale/',]
 
 TIME_ZONE = 'UTC'
 

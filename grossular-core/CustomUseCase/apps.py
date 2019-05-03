@@ -7,6 +7,3 @@ class CustomUmlCaseConfig(AppConfig):
     verbose_name = _("Case")
 
 
-
-
-
