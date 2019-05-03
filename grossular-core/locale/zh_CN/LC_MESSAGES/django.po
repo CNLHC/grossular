@@ -1,0 +1,154 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-03 16:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: CustomUMLClass/models.py:14
+msgid "normal"
+msgstr ""
+
+#: CustomUMLClass/models.py:15
+msgid "abstract"
+msgstr ""
+
+#: CustomUMLClass/models.py:16 CustomUMLComponent/models.py:23
+msgid "interface"
+msgstr ""
+
+#: CustomUMLClass/models.py:23
+msgid "inheritance"
+msgstr ""
+
+#: CustomUMLClass/models.py:24
+msgid "generalizations"
+msgstr ""
+
+#: CustomUMLClass/models.py:25
+msgid "composition"
+msgstr ""
+
+#: CustomUMLClass/models.py:26
+msgid "aggregations"
+msgstr ""
+
+#: CustomUMLClass/models.py:27
+msgid "associations"
+msgstr ""
+
+#: CustomUMLClass/models.py:28
+msgid "dependencies"
+msgstr ""
+
+#: CustomUMLClass/models.py:31
+msgid "relation name"
+msgstr ""
+
+#: CustomUMLClass/models.py:34
+msgid "relation from"
+msgstr ""
+
+#: CustomUMLClass/models.py:38
+msgid "relation to"
+msgstr ""
+
+#: CustomUMLClass/models.py:40
+msgid "from side label"
+msgstr ""
+
+#: CustomUMLClass/models.py:42
+msgid "to side label"
+msgstr ""
+
+#: CustomUMLComponent/models.py:20
+msgid "invoker"
+msgstr "调用者"
+
+#: CustomUseCase/admin.py:13
+msgid "Project"
+msgstr "项目"
+
+#: CustomUseCase/apps.py:7
+#, fuzzy
+#| msgid "UML Case"
+msgid "Case"
+msgstr "UML用例"
+
+#: CustomUseCase/models.py:14
+msgid "generalization"
+msgstr "泛化"
+
+#: CustomUseCase/models.py:22
+msgid "Actor"
+msgstr "参与者"
+
+#: CustomUseCase/models.py:23
+msgid "Actors"
+msgstr "参与者"
+
+#: CustomUseCase/models.py:28
+#, fuzzy
+#| msgid "Subsystem"
+msgid "Subsystem Name"
+msgstr "子系统"
+
+#: CustomUseCase/models.py:30
+#, fuzzy
+#| msgid "Subsystem"
+msgid "Subsystem code name"
+msgstr "子系统"
+
+#: CustomUseCase/models.py:45 CustomUseCase/models.py:64
+msgid "Subsystem"
+msgstr "子系统"
+
+#: CustomUseCase/models.py:46
+msgid "Subsystems"
+msgstr "子系统"
+
+#: CustomUseCase/models.py:50
+#, fuzzy
+#| msgid "UML Case"
+msgid "Case name"
+msgstr "UML用例"
+
+#: CustomUseCase/models.py:51
+msgid "Case comments"
+msgstr "注释"
+
+#: CustomUseCase/models.py:52
+msgid "Case association"
+msgstr "关联"
+
+#: CustomUseCase/models.py:55
+msgid "Case include"
+msgstr "包含"
+
+#: CustomUseCase/models.py:58
+msgid "Case extend"
+msgstr "扩展"
+
+#: CustomUseCase/models.py:61
+msgid "Case generalization"
+msgstr "用例泛化"
+
+#: CustomUseCase/models.py:74
+msgid "UML Case"
+msgstr "UML用例"
+
+#: CustomUseCase/models.py:75
+msgid "UML Cases"
+msgstr "UML 用例"
