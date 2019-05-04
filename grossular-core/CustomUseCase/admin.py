@@ -1,10 +1,11 @@
-from django.contrib import admin
 from Project.models import GrossularProject
 from CustomUseCase.models import GrossularCustomUseCase
 from CustomUseCase.models import GrossularCustomUseCaseActor
 from CustomUseCase.models import GrossularCustomUseCaseSubsystem
 from django.contrib.admin import SimpleListFilter
 from django.utils.translation import gettext_lazy as _
+from grossular.admin import GrossularAdminSite
+from django.contrib import  admin
 
 
 # Register your models here.
@@ -36,7 +37,6 @@ class AdminGrossularCustomUseCase(admin.ModelAdmin):
     list_filter = (ProjectFilter, SubsystemFilter)
 
 
-admin.site.register(GrossularCustomUseCase, AdminGrossularCustomUseCase)
-admin.site.register(GrossularCustomUseCaseActor)
-
-admin.site.register(GrossularCustomUseCaseSubsystem)
+GrossularAdminSite.register(GrossularCustomUseCase, AdminGrossularCustomUseCase)
+GrossularAdminSite.register(GrossularCustomUseCaseActor)
+GrossularAdminSite.register(GrossularCustomUseCaseSubsystem)

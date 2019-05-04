@@ -1,8 +1,9 @@
 from django.contrib import admin
 from CustomUMLClass.models import GrossularCustomUMLClass,GrossularCustomUMLClassMethod,GrossularCustomUMLClassRelationship
+from grossular.admin import GrossularAdminSite
 
 # Register your models here.
 
-admin.site.register(GrossularCustomUMLClass)
-admin.site.register(GrossularCustomUMLClassMethod)
-admin.site.register(GrossularCustomUMLClassRelationship)
+GrossularAdminSite.register(GrossularCustomUMLClass)
+GrossularAdminSite.register(GrossularCustomUMLClassMethod)
+GrossularAdminSite.register(GrossularCustomUMLClassRelationship)
