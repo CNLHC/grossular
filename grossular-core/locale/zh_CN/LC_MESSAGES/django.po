@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-03 16:16+0000\n"
+"POT-Creation-Date: 2019-05-04 14:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,16 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: CustomUMLBase/adminUtil.py:6
+msgid "Project"
+msgstr "项目"
+
+#: CustomUMLClass/apps.py:6
+#, fuzzy
+#| msgid "UML Cases"
+msgid "UML Class"
+msgstr "UML 用例"
 
 #: CustomUMLClass/models.py:14
 msgid "normal"
@@ -25,61 +35,192 @@ msgstr ""
 msgid "abstract"
 msgstr ""
 
-#: CustomUMLClass/models.py:16 CustomUMLComponent/models.py:23
+#: CustomUMLClass/models.py:16
 msgid "interface"
 msgstr ""
 
-#: CustomUMLClass/models.py:23
-msgid "inheritance"
+#: CustomUMLClass/models.py:21 CustomUMLClass/models.py:66
+msgid "Class"
 msgstr ""
 
-#: CustomUMLClass/models.py:24
-msgid "generalizations"
-msgstr ""
-
-#: CustomUMLClass/models.py:25
-msgid "composition"
-msgstr ""
-
-#: CustomUMLClass/models.py:26
-msgid "aggregations"
+#: CustomUMLClass/models.py:22
+msgid "Classes"
 msgstr ""
 
 #: CustomUMLClass/models.py:27
-msgid "associations"
+msgid "inheritance"
 msgstr ""
 
 #: CustomUMLClass/models.py:28
-msgid "dependencies"
+msgid "generalizations"
+msgstr ""
+
+#: CustomUMLClass/models.py:29
+msgid "composition"
+msgstr ""
+
+#: CustomUMLClass/models.py:30
+msgid "aggregations"
 msgstr ""
 
 #: CustomUMLClass/models.py:31
+msgid "associations"
+msgstr ""
+
+#: CustomUMLClass/models.py:32
+msgid "dependencies"
+msgstr ""
+
+#: CustomUMLClass/models.py:35
 msgid "relation name"
 msgstr ""
 
-#: CustomUMLClass/models.py:34
+#: CustomUMLClass/models.py:38
 msgid "relation from"
 msgstr ""
 
-#: CustomUMLClass/models.py:38
+#: CustomUMLClass/models.py:42
 msgid "relation to"
 msgstr ""
 
-#: CustomUMLClass/models.py:40
+#: CustomUMLClass/models.py:44
 msgid "from side label"
 msgstr ""
 
-#: CustomUMLClass/models.py:42
+#: CustomUMLClass/models.py:46
 msgid "to side label"
 msgstr ""
 
-#: CustomUMLComponent/models.py:20
-msgid "invoker"
+#: CustomUMLClass/models.py:49
+msgid "Class Relationship"
+msgstr ""
+
+#: CustomUMLClass/models.py:50
+#, fuzzy
+#| msgid "Case generalization"
+msgid "Classes Relationships"
+msgstr "泛化"
+
+#: CustomUMLClass/models.py:55
+msgid "public"
+msgstr "public"
+
+#: CustomUMLClass/models.py:56
+msgid "protected"
+msgstr "protected"
+
+#: CustomUMLClass/models.py:57
+msgid "private"
+msgstr "private"
+
+#: CustomUMLClass/models.py:58 CustomUMLComponent/models.py:13
+#: CustomUMLComponent/models.py:65
+msgid "package"
+msgstr "package"
+
+#: CustomUMLClass/models.py:60
+#, fuzzy
+#| msgid "UML Case"
+msgid "Method name"
+msgstr "方法名"
+
+#: CustomUMLClass/models.py:62
+#, fuzzy
+#| msgid "Case comments"
+msgid "Comments"
+msgstr "注释"
+
+#: CustomUMLClass/models.py:64
+msgid "Return type"
+msgstr "返回类型"
+
+#: CustomUMLClass/models.py:69
+msgid "Class Method"
+msgstr "类方法"
+
+#: CustomUMLClass/models.py:70
+msgid "Classes Methods"
+msgstr "类方法"
+
+#: CustomUMLComponent/admin.py:15 CustomUseCase/admin.py:17
+#: CustomUseCase/models.py:45 CustomUseCase/models.py:64
+msgid "Subsystem"
+msgstr "子系统"
+
+#: CustomUMLComponent/apps.py:7 CustomUMLComponent/models.py:17
+#: CustomUMLComponent/models.py:30
+msgid "Component"
+msgstr "组件"
+
+#: CustomUMLComponent/models.py:10
+msgid "Component Name"
+msgstr "组件名"
+
+#: CustomUMLComponent/models.py:11
+msgid "Component Code Name"
+msgstr "组件代号"
+
+#: CustomUMLComponent/models.py:18
+#, fuzzy
+#| msgid "Case comments"
+msgid "Components"
+msgstr "注释"
+
+#: CustomUMLComponent/models.py:28
+msgid "Interface Name"
+msgstr "接口名"
+
+#: CustomUMLComponent/models.py:33 CustomUMLComponent/models.py:49
+msgid "Interface"
+msgstr "接口"
+
+#: CustomUMLComponent/models.py:34
+msgid "Interfaces"
+msgstr "接口"
+
+#: CustomUMLComponent/models.py:46
+#, fuzzy
+#| msgid "invoker"
+msgid "Invoker"
 msgstr "调用者"
 
-#: CustomUseCase/admin.py:13
-msgid "Project"
-msgstr "项目"
+#: CustomUMLComponent/models.py:52
+msgid "Invoke relationship"
+msgstr "调用关系"
+
+#: CustomUMLComponent/models.py:53
+msgid "Invoke Relationships"
+msgstr "调用关系"
+
+#: CustomUMLComponent/models.py:66
+msgid "node"
+msgstr "node"
+
+#: CustomUMLComponent/models.py:67
+msgid "cloud"
+msgstr "cloud"
+
+#: CustomUMLComponent/models.py:68
+msgid "database"
+msgstr "database"
+
+#: CustomUMLComponent/models.py:70
+#, fuzzy
+#| msgid "UML Case"
+msgid "Package name"
+msgstr "包名"
+
+#: CustomUMLComponent/models.py:71
+msgid "Package Shape"
+msgstr "包形状"
+
+#: CustomUMLComponent/models.py:78
+msgid "Component Package"
+msgstr "组件包"
+
+#: CustomUMLComponent/models.py:79
+msgid "Component Packages"
+msgstr "组件包"
 
 #: CustomUseCase/apps.py:7
 #, fuzzy
@@ -109,10 +250,6 @@ msgstr "子系统"
 #, fuzzy
 #| msgid "Subsystem"
 msgid "Subsystem code name"
-msgstr "子系统"
-
-#: CustomUseCase/models.py:45 CustomUseCase/models.py:64
-msgid "Subsystem"
 msgstr "子系统"
 
 #: CustomUseCase/models.py:46
@@ -152,3 +289,11 @@ msgstr "UML用例"
 #: CustomUseCase/models.py:75
 msgid "UML Cases"
 msgstr "UML 用例"
+
+#: grossular/admin.py:7 grossular/admin.py:8
+msgid "Grossular"
+msgstr "Grossular"
+
+#: grossular/admin.py:9
+msgid "Grossular Elements administration"
+msgstr "Grossular 元素管理"
