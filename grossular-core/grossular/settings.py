@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'CustomUMLBase',
     'CustomUseCase',
     'CustomUMLClass',
+    'CustomUMLComponent',
     'Project',
     'rest_framework',
     'jet',
