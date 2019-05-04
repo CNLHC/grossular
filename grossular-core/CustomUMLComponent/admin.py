@@ -1,11 +1,12 @@
 from django.contrib import admin
+from grossular.admin import GrossularAdminSite
 from CustomUMLComponent.models import GrossularCustomUMLComponent, GrossularCustomUMLComponentInterface, \
     GrossularCustomUMLComponentPackage, GrossularCustomUMLComponentRelationship
 
 # Register your models here.
 
 
-admin.site.register(GrossularCustomUMLComponentPackage)
-admin.site.register(GrossularCustomUMLComponentRelationship)
-admin.site.register(GrossularCustomUMLComponent)
-admin.site.register(GrossularCustomUMLComponentInterface)
+GrossularAdminSite.register(GrossularCustomUMLComponentPackage)
+GrossularAdminSite.register(GrossularCustomUMLComponentRelationship)
+GrossularAdminSite.register(GrossularCustomUMLComponent)
+GrossularAdminSite.register(GrossularCustomUMLComponentInterface)
