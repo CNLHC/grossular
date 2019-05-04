@@ -1,5 +1,6 @@
 from django.db import models
 from CustomUMLBase.models import GrossularCustomElement
+from CustomUMLBase.manager import GrossularCommonManager
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -11,6 +12,7 @@ class GrossularCustomUMLComponent(GrossularCustomElement):
     package = models.ForeignKey('CustomUMLComponent.GrossularCustomUMLComponentPackage', related_name="components",
                                 null=True, on_delete=models.SET_NULL, default=None, verbose_name=(_("package")))
 
+    grossular =  GrossularCommonManager()
     class Meta:
         verbose_name = _("Component")
         verbose_name_plural = _("Components")
@@ -33,6 +35,10 @@ class GrossularCustomUMLComponentInterface(GrossularCustomElement):
 
     def __str__(self):
         return  "{0}-{1}".format(self.Component.__str__(),self.name)
+
+    def uniqueName(self):
+        return '{1}{0}'.format(self.id,self.name).replace('-','')
+
 
 
 class GrossularCustomUMLComponentRelationship(GrossularCustomElement):
@@ -63,6 +69,7 @@ class GrossularCustomUMLComponentPackage(GrossularCustomElement):
     )
     name = models.CharField(max_length=128, verbose_name=_("Package name"))
     shape = models.CharField(max_length=20, choices=PACKAGE_SHAPE_CHOICES, verbose_name=_("Package Shape"))
+    grossular = GrossularCommonManager()
 
     def __str__(self):
         return self.name

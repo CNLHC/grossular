@@ -1,0 +1,39 @@
+{% autoescape off %}
+!pragma ratio 0.9
+!pragma graphattributes overlap=false;
+left to right direction
+
+{% for interface in outerInterfaces %}
+    package 其他模块{
+    {{ interface }}
+    }
+{% endfor %}
+
+{% for package in packages %}
+    {{ package.shape }} {{ package.packageName }} {
+    {% for interface in package.interfaces %}
+        {{ interface }}
+    {% endfor %}
+    }
+{% endfor %}
+
+{% for package in packages %}
+    {% if package.packageName is not none %}
+        {{ package.shape }} {{ package.packageName }} {
+    {% endif %}
+    {% for component in package.components %}
+        {{ component }}
+    {% endfor %}
+    {% for association in package.associations %}
+        {{ association }}
+    {% endfor %}
+    {% for invoke in package.invokeList %}
+        {{ invoke }}
+    {% endfor %}
+    {% if package.packageName is not none %}
+        }
+    {% endif %}
+{% endfor %}
+
+{% endautoescape %}
+
