@@ -10,21 +10,30 @@ from django.utils.translation import gettext_lazy as _
 # Register your models here.
 
 class ProjectFilter(SimpleListFilter):
-    title = _('Project')  # or use _('country') for translated title
+    title = _('Project')
     parameter_name = 'project'
 
     def lookups(self, request, model_admin):
         return tuple([(pro.codeName, pro.name) for pro in GrossularProject.objects.all()])
 
     def queryset(self, request, queryset):
-        print(request)
-        print(self.value())
-        print(queryset)
         return queryset.filter(grossularProject__codeName=self.value())
 
 
+class SubsystemFilter(SimpleListFilter):
+    title = _('Subsystem')
+    parameter_name = 'subsystem'
+
+    def lookups(self, request, model_admin):
+        projectCodeName = request.GET.get('project')
+        return tuple([(sys.codeName, sys.name) for sys in GrossularCustomUseCaseSubsystem.objects.all().filter(grossularProject__codeName=projectCodeName)])
+
+    def queryset(self, request, queryset):
+        return queryset.filter(subsystem__codeName=self.value())
+
+
 class AdminGrossularCustomUseCase(admin.ModelAdmin):
-    list_filter = (ProjectFilter,)
+    list_filter = (ProjectFilter, SubsystemFilter)
 
 
 admin.site.register(GrossularCustomUseCase, AdminGrossularCustomUseCase)
