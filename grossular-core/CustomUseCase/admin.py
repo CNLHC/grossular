@@ -1,3 +1,4 @@
+from Project.models import GrossularProject
 from CustomUseCase.models import GrossularCustomUseCase
 from CustomUseCase.models import GrossularCustomUseCaseActor
 from CustomUseCase.models import GrossularCustomUseCaseSubsystem
@@ -26,7 +27,6 @@ class SubsystemFilter(SimpleListFilter):
 
 class AdminGrossularCustomUseCase(admin.ModelAdmin):
     list_filter = (GrossularProjectFilter, SubsystemFilter)
-
 
 GrossularAdminSite.register(GrossularCustomUseCase, AdminGrossularCustomUseCase)
 GrossularAdminSite.register(GrossularCustomUseCaseActor)
