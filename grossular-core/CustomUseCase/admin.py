@@ -1,24 +1,15 @@
-from Project.models import GrossularProject
 from CustomUseCase.models import GrossularCustomUseCase
 from CustomUseCase.models import GrossularCustomUseCaseActor
 from CustomUseCase.models import GrossularCustomUseCaseSubsystem
 from django.contrib.admin import SimpleListFilter
 from django.utils.translation import gettext_lazy as _
 from grossular.admin import GrossularAdminSite
+from CustomUMLBase.adminUtil import GrossularProjectFilter
 from django.contrib import  admin
 
 
 # Register your models here.
 
-class ProjectFilter(SimpleListFilter):
-    title = _('Project')
-    parameter_name = 'project'
-
-    def lookups(self, request, model_admin):
-        return tuple([(pro.codeName, pro.name) for pro in GrossularProject.objects.all()])
-
-    def queryset(self, request, queryset):
-        return queryset.filter(grossularProject__codeName=self.value())
 
 
 class SubsystemFilter(SimpleListFilter):
@@ -34,7 +25,7 @@ class SubsystemFilter(SimpleListFilter):
 
 
 class AdminGrossularCustomUseCase(admin.ModelAdmin):
-    list_filter = (ProjectFilter, SubsystemFilter)
+    list_filter = (GrossularProjectFilter, SubsystemFilter)
 
 
 GrossularAdminSite.register(GrossularCustomUseCase, AdminGrossularCustomUseCase)
