@@ -1,12 +1,8 @@
 from docutils import nodes
-from docutils.parsers.rst import Directive
-from sphinx.util.docutils import SphinxDirective
-import sphinxcontrib.plantuml as sphinxUML
 from grossularsphinx.abstract import PlantUMLDirective
-from sphinx.locale import _
 from sphinx.util.docutils import SphinxDirective
 import grossularsphinx.api as API
-import sphinx
+import grossularsphinx.meta as groMeta
 import requests
 import json
 
@@ -107,7 +103,7 @@ def setup(app):
     app.add_config_value('grossular_server', 'http://127.0.0.1:8000', 'html')
     app.add_config_value('grossular_project', '', 'html')
     return {
-        'version': '0.1',
+        'version': groMeta.version,
         'parallel_read_safe': True,
         'parallel_write_safe': True,
     }

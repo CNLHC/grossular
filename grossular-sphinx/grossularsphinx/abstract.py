@@ -2,11 +2,13 @@ import os
 from docutils import nodes
 from sphinx.util.docutils import SphinxDirective
 import sphinxcontrib.plantuml  as splantuml
+from sphinx.util.nodes import set_source_info
+
 
 class PlantUMLDirective(SphinxDirective):
     has_content = True
     required_arguments = 0
-    optional_arguments = 1
+    optional_arguments = 10000
     option_spec = splantuml.UmlDirective.option_spec
 
     def genImageNode(self,rawPlantuml:str):
@@ -25,7 +27,7 @@ class PlantUMLDirective(SphinxDirective):
                                                       self.lineno)
             caption_node = nodes.caption(self.options['caption'], '', *inodes)
             caption_node.extend(messages)
-            splantuml.set_source_info(self, caption_node)
+            set_source_info(self, caption_node)
             node += caption_node
         if 'html_format' in self.options:
             node['html_format'] = self.options['html_format']
