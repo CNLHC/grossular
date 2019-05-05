@@ -16,6 +16,14 @@ class GrossularCustomUMLClass(GrossularCustomUMLType):
         ('interface', _('interface'))
     )
     specification = models.CharField(max_length=20, choices=SPECIFICATION_CHOICES, default='normal')
+    component = models.ForeignKey("CustomUMLComponent.GrossularCustomUMLComponent", null=True, default=None,
+                                  on_delete=models.SET_NULL, related_name="classes", verbose_name=_("components"))
+
+    def __str__(self):
+        if self.component is None:
+            return "{name}".format(name=self.name)
+        else:
+            return "{comp}-{name}".format(comp=self.component.name, name=self.name)
 
     class Meta:
         verbose_name = _("Class")
@@ -45,26 +53,52 @@ class GrossularCustomUMLClassRelationship(GrossularCustomElement):
 
     rightLabel = models.CharField(max_length=20, blank=True, default='', verbose_name=_("to side label"))
 
+    def __str__(self):
+        return "{cl}-{relation}-{cr}".format(cl=self.left.name, cr=self.right.name, relation=self.type)
+
     class Meta:
         verbose_name = _("Class Relationship")
         verbose_name_plural = _("Classes Relationships")
 
 
-class GrossularCustomUMLClassMethod(GrossularCustomElement):
+class GrossularCustomUMLClassElement(GrossularCustomElement):
     VISIBILITY_CHOICES = (
         ('public', _('public')),
         ('protected', _('protected')),
         ('private', _('private')),
         ('package', _('package')),
     )
-    name = models.CharField(max_length=128, verbose_name=_("Method name"))
     visibility = models.CharField(max_length=20, choices=VISIBILITY_CHOICES, verbose_name=("Method visibility"))
-    comment = models.TextField(verbose_name=_("Comments"))
-    type = models.ForeignKey('CustomUMLBase.GrossularCustomUMLType', on_delete=models.SET_NULL, null=True, default=None,
-                             verbose_name=_("Return type"))
+
     master = models.ForeignKey('CustomUMLClass.GrossularCustomUMLClass', on_delete=models.CASCADE, null=True,
-                               default=None, related_name="methods", verbose_name=_("Class"))
+                               default=None, related_name="element_%(class)s", verbose_name=_("Class"))
+    name = models.CharField(max_length=128, verbose_name=_("Element name"))
+
+    comment = models.TextField(verbose_name=_("Element Comment"))
+
+    type = models.ForeignKey('CustomUMLBase.GrossularCustomUMLType', on_delete=models.SET_NULL, null=True, default=None,
+                             related_name="typed_%(class)s",
+                             verbose_name=_("Element type"))
+
+    class Meta:
+        abstract = True
+
+
+class GrossularCustomUMLClassMethod(GrossularCustomUMLClassElement):
+
+    def __str__(self):
+        return "{cn}-{mn}".format(cn=self.master.name, mn=self.name)
 
     class Meta:
         verbose_name = _("Class Method")
         verbose_name_plural = _("Classes Methods")
+
+
+class GrossularCustomUMLClassMember(GrossularCustomUMLClassElement):
+
+    def __str__(self):
+        return "{cn}-{mn}".format(cn=self.master.name, mn=self.name)
+
+    class Meta:
+        verbose_name = _("Class Member")
+        verbose_name_plural = _("Classes Members")

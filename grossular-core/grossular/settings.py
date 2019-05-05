@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'CustomUMLClass',
     'CustomUMLComponent',
     'Project',
+    'django_filters',
     'rest_framework',
     'jet',
     'django.contrib.admin',
