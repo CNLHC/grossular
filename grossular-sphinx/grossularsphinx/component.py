@@ -29,12 +29,10 @@ class InterfaceContentNode(nodes.General, nodes.Element):
 
 
 class InterfaceInlineRefNode(nodes.General, nodes.Element):
-    def __init__(self, refId,name):
+    def __init__(self, name):
         super().__init__('')
         self.meta = {
-            'refId': refId,
-            'name':name
-
+            'name': name
         }
 
 
@@ -107,7 +105,7 @@ class ComponentDetail(SphinxDirective):
 
         para = nodes.paragraph()
         IList = self.toInterfaceList(jsobj['interfaces'])
-        para+=IList
+        para += IList
         defineList += self.toDefItem('提供接口', Paragraph=para)
 
         return [targetnode, defineList]
@@ -129,7 +127,7 @@ class ComponentDetail(SphinxDirective):
         for Interface in interfaceList:
             listItem = nodes.list_item()
             para = nodes.paragraph()
-            para += InterfaceInlineRefNode(refId=INTERFACE_REF_ID % Interface['id'],name=Interface['name'])
+            para += InterfaceInlineRefNode(name=Interface['name'])
             listItem += para
             InterfaceList.append(listItem)
         return InterfaceList
@@ -157,6 +155,7 @@ class InterfaceDetail(SphinxDirective):
             "using__interface__id": jsobj['id']
         }).text)
         detailNodes = self.toNodes(jsobj)
+
         self.env.grossularInterfaceDetailed.append({
             'docname': self.env.docname,
             'refId': INTERFACE_REF_ID % jsobj['id'],
@@ -166,7 +165,7 @@ class InterfaceDetail(SphinxDirective):
         return detailNodes
 
     def toNodes(self, jsobj):
-        targetid = INTERFACE_REF_ID% jsobj['id']
+        targetid = INTERFACE_REF_ID % jsobj['id']
         targetnode = nodes.target('', '', ids=[targetid])
         defineList = nodes.definition_list()
         defineList += self.toDefItem('接口名称', value=jsobj['name'])
@@ -301,18 +300,23 @@ def ComponentRefRole(role, rawtext, text, lineno, inliner,
 
 def InterfaceRefRole(role, rawtext, text, lineno, inliner,
                      options={}, content=[]):
-    #TODO: using id here seems inconveninet for user, but useing name seems inconveninent for code.
-    #TODO: need more design
+    # TODO: using id here seems inconveninet for user, but useing name seems inconveninent for code.
+    # TODO: need more design
 
-    node = ComponentInlineRefNode('')
     namePattern = re.compile(":interface:`(.*)`")
-    codeName = re.match(namePattern, rawtext).group(1)
+    try:
+        name = re.match(namePattern, rawtext).group(1)
+        node = InterfaceInlineRefNode(name=name)
+    except:
+        node = nodes.paragraph
+
     return [node], []
 
 
 def processComponentRefInline(app, doctree, fromdocname):
     env = app.builder.env
     for node in doctree.traverse(ComponentInlineRefNode):
+
         if not hasattr(env, 'grossularComponentDetailed'):
             env.grossularComponentDetailed = []
 
@@ -340,6 +344,10 @@ def processComponentRefInline(app, doctree, fromdocname):
 def processInterfaceRefInline(app, doctree, fromdocname):
     env = app.builder.env
     detailedInterface = {}
+
+    if not hasattr(env, 'grossularInterfaceDetailed'):
+        env.grossularInterfaceDetailed = []
+
     for item in env.grossularInterfaceDetailed:
         detailedInterface[item['refId']] = item
 
@@ -348,7 +356,7 @@ def processInterfaceRefInline(app, doctree, fromdocname):
             env.grossularInterfaceDetailed = []
 
         detailedList = env.grossularInterfaceDetailed
-        detailed = [i for i in detailedList if  i['refId'] == node.meta['refId']]
+        detailed = [i for i in detailedList if i['name'] == node.meta['name']]
 
         if len(detailed) > 0:
             detailedObj = detailed[0]
@@ -376,6 +384,7 @@ def setup(app):
     app.add_directive('interfacedetail', InterfaceDetail)
 
     app.add_role('component', ComponentRefRole)
+    app.add_role('interface', InterfaceRefRole)
     app.connect('doctree-resolved', processComponentContent)
     app.connect('doctree-resolved', processComponentRefInline)
     app.connect('doctree-resolved', processInterfaceContent)

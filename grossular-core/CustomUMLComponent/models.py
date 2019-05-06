@@ -33,6 +33,7 @@ class GrossularCustomUMLComponentInterface(GrossularCustomElement):
         verbose_name = _("Interface")
         verbose_name_plural = _("Interfaces")
 
+    #TODO: override save to perform component level interface unique
     def __str__(self):
         return  "{0}-{1}".format(self.Component.__str__(),self.name)
 
