@@ -8,7 +8,7 @@ class ComponentViewSet(ModelViewSet):
     queryset = GrossularCustomUMLComponent.objects.all()
     serializer_class = ComponentDetailSerializer
     filter_backends = (filters.DjangoFilterBackend,)
-    filterset_fields = ('grossularProject__codeName','package__name','name','codeName')
+    filterset_fields = ('grossularProject__codeName','package__name','name','codeName','using__interface__id')
 
 
 class InterfaceViewSet(ModelViewSet):
