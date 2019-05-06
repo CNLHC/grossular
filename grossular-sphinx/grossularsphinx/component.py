@@ -16,6 +16,7 @@ class ComponentContentNode(nodes.General, nodes.Element):
 
 
 class ComponentInlineRefNode(nodes.General, nodes.Element):
+    # todo: using refCodeName is a bad idea here, should migrate to something like refId
     def __init__(self, componentCodeName):
         super().__init__('')
         self.meta = {
@@ -28,7 +29,13 @@ class InterfaceContentNode(nodes.General, nodes.Element):
 
 
 class InterfaceInlineRefNode(nodes.General, nodes.Element):
-    pass
+    def __init__(self, refId,name):
+        super().__init__('')
+        self.meta = {
+            'refId': refId,
+            'name':name
+
+        }
 
 
 class ComponentUML(PlantUMLDirective):
@@ -97,17 +104,35 @@ class ComponentDetail(SphinxDirective):
         defineList = nodes.definition_list()
         defineList += self.toDefItem('组件名称', jsobj['name'])
         defineList += self.toDefItem('组件代号', jsobj['codeName'])
-        defineList += self.toDefItem('提供接口', ','.join([i['name'] for i in jsobj['interfaces']]))
+
+        para = nodes.paragraph()
+        IList = self.toInterfaceList(jsobj['interfaces'])
+        para+=IList
+        defineList += self.toDefItem('提供接口', Paragraph=para)
+
         return [targetnode, defineList]
 
-    def toDefItem(self, key, value):
+    def toDefItem(self, key, value='', Paragraph=None):
         item = nodes.definition_list_item()
         term = nodes.term(key, key)
         define = nodes.definition()
-        define += nodes.paragraph(value, value)
+        if Paragraph is None:
+            define += nodes.paragraph(value, value)
+        else:
+            define += Paragraph
         item += term
         item += define
         return item
+
+    def toInterfaceList(self, interfaceList):
+        InterfaceList = nodes.bullet_list()
+        for Interface in interfaceList:
+            listItem = nodes.list_item()
+            para = nodes.paragraph()
+            para += InterfaceInlineRefNode(refId=INTERFACE_REF_ID % Interface['id'],name=Interface['name'])
+            listItem += para
+            InterfaceList.append(listItem)
+        return InterfaceList
 
 
 class InterfaceDetail(SphinxDirective):
@@ -141,7 +166,7 @@ class InterfaceDetail(SphinxDirective):
         return detailNodes
 
     def toNodes(self, jsobj):
-        targetid = COMPONENT_REF_ID % jsobj['id']
+        targetid = INTERFACE_REF_ID% jsobj['id']
         targetnode = nodes.target('', '', ids=[targetid])
         defineList = nodes.definition_list()
         defineList += self.toDefItem('接口名称', value=jsobj['name'])
@@ -276,12 +301,12 @@ def ComponentRefRole(role, rawtext, text, lineno, inliner,
 
 def InterfaceRefRole(role, rawtext, text, lineno, inliner,
                      options={}, content=[]):
+    #TODO: using id here seems inconveninet for user, but useing name seems inconveninent for code.
+    #TODO: need more design
+
     node = ComponentInlineRefNode('')
     namePattern = re.compile(":interface:`(.*)`")
     codeName = re.match(namePattern, rawtext).group(1)
-    node.meta = {
-        'refCodeName': codeName
-    }
     return [node], []
 
 
@@ -312,6 +337,33 @@ def processComponentRefInline(app, doctree, fromdocname):
         node.replace_self(newnode)
 
 
+def processInterfaceRefInline(app, doctree, fromdocname):
+    env = app.builder.env
+    detailedInterface = {}
+    for item in env.grossularInterfaceDetailed:
+        detailedInterface[item['refId']] = item
+
+    for node in doctree.traverse(InterfaceInlineRefNode):
+        if not hasattr(env, 'grossularInterfaceDetailed'):
+            env.grossularInterfaceDetailed = []
+
+        detailedList = env.grossularInterfaceDetailed
+        detailed = [i for i in detailedList if  i['refId'] == node.meta['refId']]
+
+        if len(detailed) > 0:
+            detailedObj = detailed[0]
+            newnode = nodes.reference('', '')
+            newnode['refdocname'] = detailedObj['docname']
+            newnode['refuri'] = app.builder.get_relative_uri(
+                fromdocname, detailedObj['docname'])
+            newnode['refuri'] += '#' + detailedObj['refId']
+            newnode.append(nodes.Text('接口:' + detailedObj['name'], '接口:' + detailedObj['name']))
+        else:
+            newnode = nodes.Text('接口:' + node.meta['name'], '接口:' + node.meta['name'])
+
+        node.replace_self(newnode)
+
+
 def setup(app):
     app.add_node(ComponentContentNode)
     app.add_node(ComponentInlineRefNode)
@@ -327,6 +379,7 @@ def setup(app):
     app.connect('doctree-resolved', processComponentContent)
     app.connect('doctree-resolved', processComponentRefInline)
     app.connect('doctree-resolved', processInterfaceContent)
+    app.connect('doctree-resolved', processInterfaceRefInline)
 
     return {
         'version': groMeta.version,
